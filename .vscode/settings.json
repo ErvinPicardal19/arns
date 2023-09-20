@@ -1,0 +1,12 @@
+{
+   "python.autoComplete.extraPaths": [
+      "/home/ervinpicardal/dev_ws/build/twist_stamper",
+      "/home/ervinpicardal/dev_ws/install/twist_stamper/lib/python3.10/site-packages",
+      "/home/ervinpicardal/dev_ws/build/tb3_sim",
+      "/home/ervinpicardal/dev_ws/install/tb3_sim/lib/python3.10/site-packages",
+      "/home/ervinpicardal/dev_ws/build/joy_tester",
+      "/home/ervinpicardal/dev_ws/install/joy_tester/lib/python3.10/site-packages",
+      "/opt/ros/humble/lib/python3.10/site-packages",
+      "/opt/ros/humble/local/lib/python3.10/dist-packages"
+   ]
+}

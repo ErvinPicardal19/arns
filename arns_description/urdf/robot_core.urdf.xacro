@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+   
+   
+   <link name="base_link"/>
+
+   <joint name="chassis_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="chassis_link"/>
+      <origin xyz="-0.121046 0 0" rpy="0 0 0"/>
+   </joint>
+
+   <link name="chassis_link">
+      <!-- BODY -->
+      <visual>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/chassis.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="white"/>
+      </visual>
+      <collision>
+         <!-- <origin xyz="${chassis_length/2} 0 ${(chassis_height/2)-0.051511}" rpy="0 0 0"/> -->
+         <origin xyz="${chassis_length/2} 0 ${(chassis_height/2)}" rpy="0 0 0"/>
+         <geometry>
+            <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+         </geometry>
+         <material name="white"/>
+      </collision>
+
+      <!-- HEAD -->
+      <visual name="head_visual">
+         <origin xyz="${0.350634} 0 ${0.295}" rpy="0 0 ${pi/2}"/>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/head.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="lightblue"/>
+      </visual>
+      <collision name="head_collision">
+         <origin xyz="${0.350634} 0 ${0.295 + (head_height/2)}" rpy="0 0 ${pi/2}"/>
+         <geometry>
+            <box size="${head_length} ${head_width} ${head_height}"/>
+         </geometry>
+         <material name="black"/>
+      </collision>
+
+      <visual name="head_floor">
+         <origin xyz="${0.197125+(0.150/2)} 0 ${0.290}" rpy="0 0 0"/>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/head_floor.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+      </visual>
+      
+   </link>
+
+   <!-- SCREEN -->
+
+   <joint name="screen_case_joint" type="fixed">
+      <parent link="chassis_link"/>
+      <child link="screen_case_link"/>
+      <origin xyz="0.4205 0 0.473" rpy="0 0 0"/>
+   </joint>
+
+   <link name="screen_case_link">
+      <visual>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/screen_case.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="lightblue"/>
+      </visual>
+      <collision>
+         <origin xyz="0 0 ${screen_case_height/2}"/>
+         <geometry>
+            <box size="${screen_case_length} ${screen_case_width} ${screen_case_height}"/>
+         </geometry>
+         <material name="lightblue"/>
+      </collision>
+   </link>
+
+   <gazebo reference="screen_case_link">
+      <material>Gazebo/SkyBlue</material>
+   </gazebo>
+
+   <joint name="screen_joint" type="fixed">
+      <parent link="screen_case_link"/>
+      <child link="screen_link"/>
+      <origin xyz="0 0 0.02" rpy="0 0 0"/>
+   </joint>
+
+   <link name="screen_link">
+      <visual>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/screen.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="black"/>
+      </visual>
+   </link>
+
+   <gazebo reference="screen_link">
+      <material>Gazebo/Black</material>
+   </gazebo>
+
+   <!-- LIDAR CASE -->
+
+   <joint name="lidar_case_joint" type="fixed">
+      <parent link="chassis_link"/>
+      <child link="lidar_case_link"/>
+      <origin xyz="0.277484 0 0.473" rpy="0 0 0"/>
+   </joint>
+
+   <link name="lidar_case_link">
+      <visual>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/lidar_case.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="lightblue"/>
+      </visual>
+      <collision>
+         <origin xyz="0 0 ${lidar_case_height/2}"/>
+         <geometry>
+            <box size="${lidar_case_length} ${lidar_case_width} ${lidar_case_height}"/>
+         </geometry>
+         <material name="lightblue"/>
+      </collision>
+   </link>
+
+   <gazebo reference="lidar_case_link">
+      <material>Gazebo/SkyBlue</material>
+   </gazebo>
+   
+   <!-- WHEELS -->
+   
+   <joint name="left_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="left_wheel_link"/>
+      <origin xyz="0 ${wheel_offset_y} -${wheel_offset_z}" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+   </joint>
+
+   <link name="left_wheel_link">
+      <visual>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="black"/>
+      </visual>
+      <collision>
+         <geometry>
+           <sphere radius="${wheel_radius}"/>
+         </geometry>
+         <material name="black"/>
+      </collision>
+      <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:inertial_cylinder>
+   </link>
+
+   <gazebo reference="left_wheel_link">
+      <material>Gazebo/Black</material>
+   </gazebo>
+
+   <joint name="right_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="right_wheel_link"/>
+      <origin xyz="0 -${wheel_offset_y} -${wheel_offset_z}" rpy="${pi} 0 0"/>
+      <axis xyz="0 -1 0"/>
+   </joint>
+
+   <link name="right_wheel_link">
+      <visual>
+         <geometry>
+            <mesh filename="file://$(find arns_description)/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="black"/>
+      </visual>
+      <collision>
+         <geometry>
+           <sphere radius="${wheel_radius}"/>
+         </geometry>
+         <material name="black"/>
+      </collision>
+      <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_thickness}" radius="${wheel_radius}">
+         <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:inertial_cylinder>
+   </link>
+
+   <gazebo reference="right_wheel_link">
+      <material>Gazebo/Black</material>
+   </gazebo>
+
+   <!-- CASTER WHEELS -->
+   <joint name="caster_wheel_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="caster_wheel_link"/>
+      <origin xyz="${caster_wheel_offset_x - 0.121046} 0 -0.026"/>
+   </joint>
+
+   <link name="caster_wheel_link">
+      <visual>
+         <geometry>
+            <sphere radius="${caster_wheel_radius}"/>
+         </geometry>
+         <material name="black"/>
+      </visual>
+      <collision>
+         <geometry>
+            <sphere radius="${caster_wheel_radius}"/>
+         </geometry>
+
+         <!-- <xacro:no_wheel_slipping/> -->
+         
+      </collision>
+      <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${caster_wheel_radius}">
+         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      </xacro:inertial_sphere>
+   </link>
+
+   <gazebo reference="caster_wheel_link">
+      <material>Gazebo/Black</material>
+      <mu1 value="0.001"/>
+      <mu2 value="0.001"/>
+   </gazebo>
+
+   
+
+</robot>

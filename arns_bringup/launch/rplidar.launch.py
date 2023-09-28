@@ -28,12 +28,18 @@ def generate_launch_description():
         default_value='Standard',
         description='Lidar scan mode'
     )
+    baud_rate_arg = DeclareLaunchArgument(
+        name='serial_baudrate',
+        default_value='115200',
+        description='Lidar UART baudrate'
+    )
 
     return LaunchDescription([
         serial_port_arg,
         frame_id_arg,
         angle_compensate_arg,
-        scan_mode_arg, 
+        scan_mode_arg,
+        baud_rate_arg,
 
         Node(
             package='rplidar_ros',
@@ -43,7 +49,8 @@ def generate_launch_description():
                 'serial_port': LaunchConfiguration('serial_port'),
                 'frame_id': LaunchConfiguration('frame_id'),
                 'angle_compensate': LaunchConfiguration('angle_compensate'),
-                'scan_mode': LaunchConfiguration('scan_mode')
+                'scan_mode': LaunchConfiguration('scan_mode'),
+                'serial_baudrate': LaunchConfiguration('serial_baudrate')
             }]
         )
     ])

@@ -57,7 +57,7 @@ def generate_launch_description():
       
       rsp,
       
-      TimerAction(period=3.0, actions=[controller_manager]),
+      TimerAction(period=2.0, actions=[controller_manager]),
       
        RegisterEventHandler(
          event_handler=OnProcessStart(

@@ -18,11 +18,18 @@ def generate_launch_description():
       description="Use gazebo simulation time"
    )
    
+   use_ros2_control = LaunchConfiguration('use_ros2_control')
+   declare_ros2_control = DeclareLaunchArgument(
+      name="use_ros2_control", 
+      default_value="True",
+      description="Enable ros2_control if true")
+   
    pkg_path = os.path.join(get_package_share_directory("arns_description"))
    xacro_file = os.path.join(pkg_path, "urdf", "robot.urdf.xacro")
-   urdf_file = Command(["xacro ", xacro_file])
+   # urdf_file = Command(["xacro ", xacro_file])
+   robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
    
-   params = {'robot_description': urdf_file, 'use_sim_time': use_sim_time}
+   params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
    start_robot_state_publisher = Node(
       package="robot_state_publisher",
       executable="robot_state_publisher",
@@ -45,6 +52,7 @@ def generate_launch_description():
    
    return LaunchDescription([
       declare_use_sim_time,
+      declare_ros2_control,
 
       start_robot_state_publisher,
       joint_state_publisher

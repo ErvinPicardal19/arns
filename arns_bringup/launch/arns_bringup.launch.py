@@ -29,19 +29,29 @@ def generate_launch_description():
       parameters=[{"robot_description": robot_description}, controllers_param]
    )
    
+   start_delayed_controller_manager = TimerAction(period=2.0, actions=[controller_manager])
+   
+   diff_cont_controller = Node(
+      package="controller_manager",
+      executable="spawner",
+      arguments=['diff_cont']
+   )
+   
+   start_delayed_diff_drive_spawner = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[diff_cont_controller]))
+   
    joint_broad_controller = Node(
-      condition=IfCondition(use_ros2_control),
       package="controller_manager",
       executable="spawner",
       arguments=['joint_broad']
    )
    
-   diff_cont_controller = Node(
-      condition=IfCondition(use_ros2_control),
-      package="controller_manager",
-      executable="spawner",
-      arguments=['diff_cont']
-   )
+   start_delayed_joint_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[joint_broad_controller]))
    
    return LaunchDescription([
       DeclareLaunchArgument(
@@ -57,21 +67,9 @@ def generate_launch_description():
       
       rsp,
       
-      TimerAction(period=2.0, actions=[controller_manager]),
-      
-       RegisterEventHandler(
-         event_handler=OnProcessStart(
-            target_action=controller_manager,
-            on_start=[diff_cont_controller]
-         )
-      ),
-      
-      RegisterEventHandler(
-         event_handler=OnProcessStart(
-            target_action=controller_manager,
-            on_start=[joint_broad_controller]
-         )
-      ),
+      start_delayed_controller_manager,
+      start_delayed_diff_drive_spawner,
+      start_delayed_joint_broadcaster_spawner
       
       # RegisterEventHandler(
       #    event_handler=OnProcessExit(

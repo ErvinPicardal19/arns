@@ -7,6 +7,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 
 
 def generate_launch_description():
@@ -26,9 +27,15 @@ def generate_launch_description():
    
    world_path = LaunchConfiguration("world")
    declare_world_path = DeclareLaunchArgument(
-      name="world",
+      name="world", 
       default_value=os.path.join(pkg_path, "worlds", "empty.world"),
       description="Gazebo world path to load")
+   
+   use_ros2_control = LaunchConfiguration('use_ros2_control')
+   declare_ros2_control = DeclareLaunchArgument(
+      name="use_ros2_control", 
+      default_value="True",
+      description="Enable ros2_control if true")
    
    start_robot_state_publisher = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(pkg_description, 'launch', 'rsp.launch.py')]),
@@ -55,12 +62,29 @@ def generate_launch_description():
       parameters=[{"use_sim_time": use_sim_time}]
    )
    
+   spawn_diff_controller = Node(
+      condition=IfCondition(use_ros2_control),
+      package="controller_manager",
+      executable="spawner",
+      arguments=["diff_cont"],
+   )
+   
+   spawn_joint_broadcaster = Node(
+      condition=IfCondition(use_ros2_control),
+      package="controller_manager",
+      executable="spawner",
+      arguments=["joint_broad"],
+   )
+   
    return LaunchDescription([
       declare_use_sim_time,
       declare_world_path,
+      declare_ros2_control,
       
       start_robot_state_publisher,
       start_gazebo,
       spawn_entity,
-      start_rviz2
+      start_rviz2,
+      spawn_diff_controller,
+      spawn_joint_broadcaster
    ])

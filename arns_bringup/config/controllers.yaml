@@ -9,11 +9,11 @@ controller_manager: # Node name
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-
+`
 diff_cont:
   ros__parameters:
       
-    publish_rate: 30.0 #60.0 # Has to be a double otherwise errors are encountered
+    publish_rate: 60.0 #60.0 # Has to be a double otherwise errors are encountered
     # use_sim_time: true
 
     base_frame_id: base_link

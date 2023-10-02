@@ -39,7 +39,7 @@ def generate_launch_description():
    
    start_robot_state_publisher = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(pkg_description, 'launch', 'rsp.launch.py')]),
-      launch_arguments={'use_sim_time': use_sim_time}.items()
+      launch_arguments={'use_sim_time': use_sim_time, 'use_ros2_control': use_ros2_control}.items()
    )
    
    start_gazebo = IncludeLaunchDescription(

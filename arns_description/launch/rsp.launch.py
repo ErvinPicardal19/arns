@@ -27,7 +27,7 @@ def generate_launch_description():
    pkg_path = os.path.join(get_package_share_directory("arns_description"))
    xacro_file = os.path.join(pkg_path, "urdf", "robot.urdf.xacro")
    # urdf_file = Command(["xacro ", xacro_file])
-   robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
+   robot_description_config = Command(['xacro ', xacro_file, ' use_ros2_control:=', use_ros2_control])
    
    params = {'robot_description': robot_description_config, 'use_sim_time': use_sim_time}
    start_robot_state_publisher = Node(

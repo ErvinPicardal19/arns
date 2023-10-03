@@ -8,5 +8,11 @@
       "/home/ervinpicardal/dev_ws/install/joy_tester/lib/python3.10/site-packages",
       "/opt/ros/humble/lib/python3.10/site-packages",
       "/opt/ros/humble/local/lib/python3.10/dist-packages"
+   ],
+   "cSpell.words": [
+      "autorepeat",
+      "deadzone",
+      "remappings",
+      "teleop"
    ]
 }

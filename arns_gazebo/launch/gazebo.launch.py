@@ -14,6 +14,7 @@ def generate_launch_description():
    
    pkg_path = os.path.join(get_package_share_directory("arns_gazebo"))
    pkg_description = os.path.join(get_package_share_directory("arns_description"))
+   pkg_teleop = os.path.join(get_package_share_directory("arns_teleop"))
    
    gazebo_directory = os.path.join(get_package_share_directory("gazebo_ros"))
    gazebo_params_file = os.path.join(pkg_path, "config/gazebo_params.yaml")
@@ -40,6 +41,10 @@ def generate_launch_description():
    start_robot_state_publisher = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(pkg_description, 'launch', 'rsp.launch.py')]),
       launch_arguments={'use_sim_time': use_sim_time, 'use_ros2_control': use_ros2_control}.items()
+   )
+   
+   start_joy_teleop = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(pkg_teleop, 'launch', 'joystick.launch.py')])
    )
    
    start_gazebo = IncludeLaunchDescription(
@@ -82,9 +87,10 @@ def generate_launch_description():
       declare_ros2_control,
       
       start_robot_state_publisher,
+      start_joy_teleop,
       start_gazebo,
       spawn_entity,
       start_rviz2,
       spawn_diff_controller,
-      spawn_joint_broadcaster
+      spawn_joint_broadcaster,
    ])

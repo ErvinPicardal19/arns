@@ -20,7 +20,7 @@ diff_cont:
     left_wheel_names: ['left_wheel_joint']
     right_wheel_names: ['right_wheel_joint']
     wheel_separation: 0.241
-    wheel_radius: 0.04
+    wheel_radius: 0.0395
     
 
     # pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.01]

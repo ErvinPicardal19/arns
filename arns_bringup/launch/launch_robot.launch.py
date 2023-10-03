@@ -62,7 +62,6 @@ def generate_launch_description():
    # )
    
    spawn_diff_controller = Node(
-      condition=IfCondition(use_ros2_control),
       package="controller_manager",
       executable="spawner",
       arguments=["diff_cont"],
@@ -76,7 +75,6 @@ def generate_launch_description():
    )
    
    spawn_joint_broadcaster = Node(
-      condition=IfCondition(use_ros2_control),
       package="controller_manager",
       executable="spawner",
       arguments=["joint_broad"],

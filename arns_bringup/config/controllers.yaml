@@ -1,7 +1,7 @@
 controller_manager: # Node name
   ros__parameters:
     update_rate: 30 # Has to be an integer otherwise errors are encountered
-    # use_sim_time: true
+    use_sim_time: true
 
     diff_cont:
       type: diff_drive_controller/DiffDriveController
@@ -9,12 +9,11 @@ controller_manager: # Node name
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-`
 diff_cont:
   ros__parameters:
       
     publish_rate: 60.0 #60.0 # Has to be a double otherwise errors are encountered
-    # use_sim_time: true
+    use_sim_time: true
 
     base_frame_id: base_link
   

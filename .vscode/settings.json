@@ -10,8 +10,10 @@
       "/opt/ros/humble/local/lib/python3.10/dist-packages"
    ],
    "cSpell.words": [
+      "amcl",
       "autorepeat",
       "deadzone",
+      "rclcpp",
       "remappings",
       "teleop"
    ]

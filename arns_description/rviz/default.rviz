@@ -6,9 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /LaserScan1/Topic1
-        - /Map1
-        - /Map1/Status1
-        - /Map2
       Splitter Ratio: 0.5
     Tree Height: 715
   - Class: rviz_common/Selection
@@ -254,7 +251,7 @@ Visualization Manager:
       Class: rviz_default_plugins/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: Map
       Topic:
         Depth: 5
@@ -270,7 +267,7 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /global_costmap/costmap_updates
       Use Timestamp: false
-      Value: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -326,7 +323,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 92.95002746582031
+      Scale: 62.430702209472656
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
       X: 0.5927952527999878

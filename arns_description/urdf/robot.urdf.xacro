@@ -26,9 +26,8 @@
    </xacro:unless>
    
    <!-- Sensors -->
+   <xacro:include filename="$(find arns_description)/urdf/imu.xacro"/>
    <xacro:include filename="$(find arns_description)/urdf/lidar.xacro"/>
    <xacro:include filename="$(find arns_description)/urdf/camera.xacro"/>
-
-   <!-- <xacro:include filename="$(find arns_description)/urdf/imu.xacro"/> -->
    
 </robot>

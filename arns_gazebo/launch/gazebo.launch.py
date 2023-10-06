@@ -12,12 +12,15 @@ from launch.conditions import IfCondition
 
 def generate_launch_description():
    
-   pkg_path = os.path.join(get_package_share_directory("arns_gazebo"))
+   pkg_gazebo = os.path.join(get_package_share_directory("arns_gazebo"))
    pkg_description = os.path.join(get_package_share_directory("arns_description"))
    pkg_teleop = os.path.join(get_package_share_directory("arns_teleop"))
+   pkg_navigation = os.path.join(get_package_share_directory("arns_navigation"))
    
    gazebo_directory = os.path.join(get_package_share_directory("gazebo_ros"))
-   gazebo_params_file = os.path.join(pkg_path, "config/gazebo_params.yaml")
+   gazebo_params_file = os.path.join(pkg_gazebo, "config/gazebo_params.yaml")
+   
+   ekf_param_file = os.path.join(pkg_navigation, "config/ekf_params.yaml")
    
    use_sim_time = LaunchConfiguration("use_sim_time")
    declare_use_sim_time = DeclareLaunchArgument(
@@ -29,7 +32,7 @@ def generate_launch_description():
    world_path = LaunchConfiguration("world")
    declare_world_path = DeclareLaunchArgument(
       name="world", 
-      default_value=os.path.join(pkg_path, "worlds", "empty.world"),
+      default_value=os.path.join(pkg_gazebo, "worlds", "empty.world"),
       description="Gazebo world path to load")
    
    use_ros2_control = LaunchConfiguration('use_ros2_control')
@@ -81,6 +84,11 @@ def generate_launch_description():
       arguments=["joint_broad"],
    )
    
+   start_robot_localization_cmd = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        parameters=[ekf_param_file])
+   
    return LaunchDescription([
       declare_use_sim_time,
       declare_world_path,
@@ -93,4 +101,5 @@ def generate_launch_description():
       start_rviz2,
       spawn_diff_controller,
       spawn_joint_broadcaster,
+      start_robot_localization_cmd
    ])

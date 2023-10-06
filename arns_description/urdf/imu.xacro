@@ -23,6 +23,7 @@
    </link>
 
    <gazebo reference="imu_link">
+    <material>Gazebo/Red</material>
       <sensor name="bno055_imu" type="imu">
        <plugin name="imu_controller" filename="libgazebo_ros_imu_sensor.so">
           <ros>

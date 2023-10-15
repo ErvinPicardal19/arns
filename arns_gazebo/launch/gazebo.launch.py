@@ -87,19 +87,22 @@ def generate_launch_description():
    start_robot_localization_cmd = Node(
         package='robot_localization',
         executable='ekf_node',
-        parameters=[ekf_param_file])
+        parameters=[ekf_param_file,
+                    {'use_sim_time': use_sim_time}])
    
    return LaunchDescription([
       declare_use_sim_time,
       declare_world_path,
       declare_ros2_control,
       
-      start_robot_state_publisher,
+      
       start_joy_teleop,
+      start_robot_localization_cmd,
       start_gazebo,
-      spawn_entity,
-      start_rviz2,
+      start_robot_state_publisher,
       spawn_diff_controller,
       spawn_joint_broadcaster,
-      start_robot_localization_cmd
+      spawn_entity,
+      start_rviz2,
+      
    ])

@@ -16,7 +16,14 @@ def generate_launch_description():
    
    pkg_description = get_package_share_directory('arns_description')
    pkg_bringup = get_package_share_directory('arns_bringup')
+   pkg_navigation = get_package_share_directory('arns_navigation')
+   pkg_teleop = os.path.join(get_package_share_directory("arns_teleop"))
    
+   ekf_param_file = os.path.join(pkg_navigation, "config/ekf_params.yaml")
+   
+   start_joy_teleop = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(pkg_teleop, 'launch', 'joystick.launch.py')])
+   )
    
    rsp = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
@@ -44,6 +51,12 @@ def generate_launch_description():
       executable="spawner",
       arguments=['diff_cont']
    )
+   
+   start_robot_localization_cmd = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        parameters=[ekf_param_file,
+                    {'use_sim_time': use_sim_time}])
     
    return LaunchDescription([
       DeclareLaunchArgument(
@@ -79,7 +92,8 @@ def generate_launch_description():
       #    )
       # ),
       
-      
+      start_joy_teleop,
+      start_robot_localization_cmd,
       rsp,
       TimerAction(period=3.0, actions=[controller_manager])
    ])

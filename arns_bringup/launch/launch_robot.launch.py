@@ -21,9 +21,9 @@ def generate_launch_description():
    
    ekf_param_file = os.path.join(pkg_navigation, "config/ekf_params.yaml")
    
-   start_joy_teleop = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(pkg_teleop, 'launch', 'joystick.launch.py')])
-   )
+   # start_joy_teleop = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(pkg_teleop, 'launch', 'joystick.launch.py')])
+   # )
    
    rsp = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
@@ -43,13 +43,15 @@ def generate_launch_description():
    joint_broad_controller = Node(
       package="controller_manager",
       executable="spawner",
-      arguments=['joint_broad']
+      arguments=['joint_broad'],
+      parameters=[controllers_param]
    )
    
    diff_cont_controller = Node(
       package="controller_manager",
       executable="spawner",
-      arguments=['diff_cont']
+      arguments=['diff_cont'],
+      parameters=[controllers_param]
    )
    
    start_robot_localization_cmd = Node(
@@ -92,7 +94,7 @@ def generate_launch_description():
       #    )
       # ),
       
-      start_joy_teleop,
+      # start_joy_teleop,
       start_robot_localization_cmd,
       rsp,
       TimerAction(period=3.0, actions=[controller_manager])

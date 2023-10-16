@@ -44,14 +44,12 @@ def generate_launch_description():
       package="controller_manager",
       executable="spawner",
       arguments=['joint_broad'],
-      parameters=[controllers_param]
    )
    
    diff_cont_controller = Node(
       package="controller_manager",
       executable="spawner",
       arguments=['diff_cont'],
-      parameters=[controllers_param]
    )
    
    start_robot_localization_cmd = Node(

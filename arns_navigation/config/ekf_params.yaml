@@ -14,32 +14,19 @@ ekf_filter_node:
         world_frame: odom
 
         odom0: /diff_cont/odom
+        imu0: /imu_broadcaster/imu
+
         odom0_config: [false, false, false,
                        false, false, false,
                        true, true, false, 
                        false, false, true,
                        false, false, false]
-        odom0_differential: false
-        # odom0_relative: true 
-        # odom0_queue_size: 40
 
-        imu0: /imu_broadcaster/imu
         imu0_config: [false, false, false, 
                       false, false, false, 
                       false, false, false,
                       false, false, true, 
                       true, false, false]
-        imu0_differential: false
-        # imu0_relative: true
-        # imu0_queue_size: 50
- 
-        #        [x_pos   , y_pos    , z_pos,
-        #         roll    , pitch    , yaw,
-        #         x_vel   , y_vel    , z_vel,
-        #         roll_vel, pitch_vel, yaw_vel,
-        #         x_accel , y_accel  , z_accel]
-
-        
 
         
 

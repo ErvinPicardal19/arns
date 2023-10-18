@@ -29,7 +29,7 @@
       <!-- BODY -->
       <visual>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/chassis.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/chassis.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="white"/>
       </visual>
@@ -46,7 +46,7 @@
       <visual name="head_visual">
          <origin xyz="${0.350634} 0 ${0.295}" rpy="0 0 ${pi/2}"/>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/head.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/head.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="lightblue"/>
       </visual>
@@ -61,7 +61,7 @@
       <visual name="head_floor">
          <origin xyz="${0.197125+(0.150/2)} 0 ${0.290}" rpy="0 0 0"/>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/head_floor.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/head_floor.stl" scale="0.001 0.001 0.001"/>
          </geometry>
       </visual>
       
@@ -78,7 +78,7 @@
    <link name="screen_case_link">
       <visual>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/screen_case.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/screen_case.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="lightblue"/>
       </visual>
@@ -104,7 +104,7 @@
    <link name="screen_link">
       <visual>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/screen.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/screen.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
       </visual>
@@ -125,7 +125,7 @@
    <link name="lidar_case_link">
       <visual>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/lidar_case.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/lidar_case.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="lightblue"/>
       </visual>
@@ -154,7 +154,7 @@
    <link name="left_wheel_link">
       <visual>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
       </visual>
@@ -183,7 +183,7 @@
    <link name="right_wheel_link">
       <visual>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
       </visual>

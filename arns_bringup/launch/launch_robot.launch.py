@@ -15,9 +15,9 @@ def generate_launch_description():
    
    
    pkg_description = get_package_share_directory('arns_description')
+   pkg_bno055 = get_package_share_directory('bno055')
    pkg_bringup = get_package_share_directory('arns_bringup')
    pkg_navigation = get_package_share_directory('arns_navigation')
-   pkg_teleop = os.path.join(get_package_share_directory("arns_teleop"))
    
    ekf_param_file = os.path.join(pkg_navigation, "config/ekf_params.yaml")
    
@@ -57,6 +57,18 @@ def generate_launch_description():
         executable='ekf_node',
         parameters=[ekf_param_file,
                     {'use_sim_time': use_sim_time}])
+   
+   start_bno055 = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_bno055, 'launch', 'bno055.launch.py'
+      )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+   )
+   
+   start_rplidar = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_bringup, 'launch', 'rplidar.launch.py'
+      )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+   )
     
    return LaunchDescription([
       DeclareLaunchArgument(
@@ -95,5 +107,7 @@ def generate_launch_description():
       # start_joy_teleop,
       start_robot_localization_cmd,
       rsp,
+      start_bno055,
+      start_rplidar,
       TimerAction(period=3.0, actions=[controller_manager])
    ])

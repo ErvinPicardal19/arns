@@ -1,11 +1,7 @@
 image: map_real_save.pgm
 mode: trinary
 resolution: 0.05
-<<<<<<< HEAD
-origin: [-2.34, -4.63, 0]
-=======
-origin: [-2.09, -1.57, 0]
->>>>>>> 0cda3121c1a001a38bab45f9cf12cf39fc6c2bac
+origin: [-2.19, -0.853, 0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.25

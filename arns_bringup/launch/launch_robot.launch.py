@@ -18,6 +18,7 @@ def generate_launch_description():
    pkg_bno055 = get_package_share_directory('bno055')
    pkg_bringup = get_package_share_directory('arns_bringup')
    pkg_navigation = get_package_share_directory('arns_navigation')
+   pkg_foxglove = get_package_share_directory('foxglove_bridge')
    
    ekf_param_file = os.path.join(pkg_navigation, "config/ekf_params.yaml")
    
@@ -67,7 +68,7 @@ def generate_launch_description():
    start_rplidar = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
          pkg_bringup, 'launch', 'rplidar.launch.py'
-      )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+      )])
    )
     
    return LaunchDescription([
@@ -107,7 +108,7 @@ def generate_launch_description():
       # start_joy_teleop,
       start_robot_localization_cmd,
       rsp,
-      start_bno055,
       start_rplidar,
+      start_bno055,
       TimerAction(period=3.0, actions=[controller_manager])
    ])

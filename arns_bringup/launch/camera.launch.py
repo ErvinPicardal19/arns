@@ -36,7 +36,7 @@ def generate_launch_description():
          parameters=[{
                'image_size': LaunchConfiguration('image_size'),
                'camera_frame_id': LaunchConfiguration('camera_frame_id'),
-               'time_per_frame': LaunchConfiguration('time_per_frame')
+               # 'time_per_frame': LaunchConfiguration('time_per_frame')
          }]
       )
    ])

@@ -18,16 +18,16 @@ def generate_launch_description():
         default_value='camera_link_optical',
         description='Camera transform frame'
     )
-   time_per_frame = DeclareLaunchArgument(
-      name='time_per_frame',
-      default_value='[1, 6]',
-      description=''
-   )
+   # time_per_frame = DeclareLaunchArgument(
+   #    name='time_per_frame',
+   #    default_value='[1, 6]',
+   #    description=''
+   # )
 
    return LaunchDescription([
       image_size_arg,
       camera_frame_id_arg,
-      time_per_frame,
+      # time_per_frame,
 
       Node(
          package='v4l2_camera',

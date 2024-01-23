@@ -108,7 +108,7 @@
    <link name="screen_link">
       <visual>
          <geometry>
-            <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/screen.stl" scale="0.001 0.001 0.001"/>
+            <!-- <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/screen.stl" scale="0.001 0.001 0.001"/> -->
             <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/screen.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
@@ -130,7 +130,7 @@
    <link name="lidar_case_link">
       <visual>
          <geometry>
-            <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/lidar_case.stl" scale="0.001 0.001 0.001"/>
+            <!-- <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/lidar_case.stl" scale="0.001 0.001 0.001"/> -->
             <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/lidar_case.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="lightblue"/>
@@ -160,7 +160,7 @@
    <link name="left_wheel_link">
       <visual>
          <geometry>
-            <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
+            <!-- <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/> -->
             <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
@@ -190,7 +190,7 @@
    <link name="right_wheel_link">
       <visual>
          <geometry>
-            <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
+            <!-- <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/> -->
             <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>

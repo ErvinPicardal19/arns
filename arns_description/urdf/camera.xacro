@@ -10,7 +10,7 @@
    <link name="camera_link">
       <visual>
          <geometry>
-            <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/camera.stl" scale="0.001 0.001 0.001"/>
+            <!-- <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/camera.stl" scale="0.001 0.001 0.001"/> -->
             <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/camera.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>

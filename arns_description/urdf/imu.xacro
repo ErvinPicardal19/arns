@@ -11,7 +11,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
          <geometry>
-            <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/imu.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/imu.stl" scale="0.001 0.001 0.001"/>
          </geometry>
       </visual>
       <geometry>

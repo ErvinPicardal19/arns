@@ -71,11 +71,11 @@ def generate_launch_description():
       )])
    )
    
-   start_camera = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_bringup, 'launch', 'camera.launch.py'
-      )])
-   )
+   # start_camera = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(
+   #       pkg_bringup, 'launch', 'camera.launch.py'
+   #    )])
+   # )
     
    return LaunchDescription([
       DeclareLaunchArgument(
@@ -115,7 +115,7 @@ def generate_launch_description():
       start_robot_localization_cmd,
       rsp,
       start_rplidar,
-      start_camera,
+      # start_camera,
       start_bno055,
       TimerAction(period=3.0, actions=[controller_manager])
    ])

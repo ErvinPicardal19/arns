@@ -13,7 +13,8 @@
       <visual>
          <origin xyz="0 0 -${lidar_height/2}"/>
          <geometry>
-            <mesh filename="file://$(find arns_description)/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
+            <!-- <mesh filename="file:///home/display/robot_ws/src/arns/arns_description/meshes/lidar.stl" scale="0.001 0.001 0.001"/> -->
+            <mesh filename="file:///home/ervinpicardal/robot_ws/src/arns_description/meshes/lidar.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
       </visual>

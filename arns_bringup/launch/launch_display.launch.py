@@ -45,12 +45,12 @@ def generate_launch_description():
    #    )]), launch_arguments={'use_sim_time': use_sim_time}.items()
    # )
    
-   start_rviz2 = Node(
-      package="rviz2",
-      executable="rviz2",
-      arguments=['-d', os.path.join(pkg_description, "rviz/default.rviz")],
-      parameters=[{"use_sim_time": use_sim_time}]
-   )
+   # start_rviz2 = Node(
+   #    package="rviz2",
+   #    executable="rviz2",
+   #    arguments=['-d', os.path.join(pkg_description, "rviz/default.rviz")],
+   #    parameters=[{"use_sim_time": use_sim_time}]
+   # )
    
    return LaunchDescription([
       declare_use_sim_time,
@@ -59,5 +59,5 @@ def generate_launch_description():
       start_joy_teleop,
       start_amcl,
       #start_navigation,
-      start_rviz2
+      # start_rviz2
    ])

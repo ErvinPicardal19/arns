@@ -13,6 +13,7 @@ def generate_launch_description():
    pkg_description = os.path.join(get_package_share_directory("arns_description"))
    pkg_teleop = os.path.join(get_package_share_directory("arns_teleop"))
    pkg_navigation = os.path.join(get_package_share_directory("arns_navigation"))
+   pkg_bringup = os.path.join(get_package_share_directory("arns_bringup"))
    
    pkg_slam = os.path.join(get_package_share_directory("arns_slam"))
    
@@ -52,12 +53,19 @@ def generate_launch_description():
    #    parameters=[{"use_sim_time": use_sim_time}]
    # )
    
+   start_camera = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_bringup, 'launch', 'camera.launch.py'
+      )])
+   )
+   
    return LaunchDescription([
       declare_use_sim_time,
       declare_map_path,
       
       start_joy_teleop,
       start_amcl,
+      start_camera,
       #start_navigation,
       # start_rviz2
    ])

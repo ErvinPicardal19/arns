@@ -66,13 +66,7 @@ def generate_launch_description():
       
       # start_joy_teleop,
       start_amcl,
-      RegisterEventHandler(
-         event_handler=OnProcessStart(
-            target_action=start_amcl,
-            on_exit=[start_navigation]
-         )
-      ),
       # start_camera,
-      # start_navigation,
+      start_navigation,
       # start_rviz2
    ])

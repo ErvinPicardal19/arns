@@ -40,11 +40,12 @@ def generate_launch_description():
       )]), launch_arguments={'use_sim_time': use_sim_time, 'map': map}.items()
    )
    
-   # start_navigation = IncludeLaunchDescription(
-   #    PythonLaunchDescriptionSource([os.path.join(
-   #       pkg_navigation, 'launch', 'navigation_launch.py'
-   #    )]), launch_arguments={'use_sim_time': use_sim_time}.items()
-   # )
+   start_navigation = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_navigation, 'launch', 'navigation_launch.py'
+      )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+   )
+   
    
    # start_rviz2 = Node(
    #    package="rviz2",
@@ -63,9 +64,15 @@ def generate_launch_description():
       declare_use_sim_time,
       declare_map_path,
       
-      start_joy_teleop,
+      # start_joy_teleop,
       start_amcl,
-      start_camera,
-      #start_navigation,
+      RegisterEventHandler(
+         event_handler=OnProcessStart(
+            target_action=start_amcl,
+            on_exit=[start_navigation]
+         )
+      ),
+      # start_camera,
+      # start_navigation,
       # start_rviz2
    ])

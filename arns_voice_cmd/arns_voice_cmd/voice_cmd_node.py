@@ -10,12 +10,12 @@ import json
 import subprocess
 import time
 
-model = Model(r"/home/ervinpicardal/python_ws/voice_speech_detection/vosk-model-en")
+model = Model(r"/home/display/robot_ws/src/arns/arns_voice_cmd/vosk-model-en")
 recognizer = KaldiRecognizer(model, 16000)
 mic = pyaudio.PyAudio()
 stream = mic.open(format=pyaudio.paInt16, channels=1,
                      rate=16000, input=True, frames_per_buffer=8192)
-sound_files_path = '/home/ervinpicardal/robot_ws/src/arns_voice_cmd/resource'
+sound_files_path = '/home/display/robot_ws/src/arns/arns_voice_cmd/resource'
 
 class Voice_CMD_Node(Node):
    def __init__(self):

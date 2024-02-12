@@ -27,7 +27,7 @@ def generate_launch_description():
    map = LaunchConfiguration("map")
    declare_map_path = DeclareLaunchArgument(
       name="map", 
-      default_value=os.path.join(pkg_slam, "maps", "map_real_save.yaml"),
+      default_value=os.path.join(pkg_slam, "maps", "map_test_save.yaml"),
       description="amcl map to load")
    
    start_joy_teleop = IncludeLaunchDescription(

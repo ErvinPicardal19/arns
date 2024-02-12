@@ -55,9 +55,10 @@ class Voice_CMD_Node(Node):
             goal_pose.pose.position.x = 0.69
             goal_pose.pose.position.y = 0.66
             self.goal_pose_publisher_.publish(goal_pose)
-            self.wake_up = False
+            
          elif 'living room' in voice_data.lower():
             pass
+      self.wake_up = False
          
 
    def text2speech(self, file):

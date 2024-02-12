@@ -52,13 +52,14 @@ class Voice_CMD_Node(Node):
             goal_pose = PoseStamped()
             goal_pose.header.stamp = self.get_clock().now().to_msg()
             goal_pose.header.frame_id = "map"
-            goal_pose.pose.position.x = 0.69
-            goal_pose.pose.position.y = 0.66
+            goal_pose.pose.position.x = 0.0710379
+            goal_pose.pose.position.y = -0.633185
             self.goal_pose_publisher_.publish(goal_pose)
+            self.wake_up = False
             
          elif 'living room' in voice_data.lower():
             pass
-      self.wake_up = False
+
          
 
    def text2speech(self, file):

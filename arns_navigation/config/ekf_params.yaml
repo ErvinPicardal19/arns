@@ -30,7 +30,7 @@ ekf_filter_node:
 
         # imu0_pose_rejection_threshold: 0.45                 # Note the difference in parameter names
         #imu0_twist_rejection_threshold: 0.625                #
-        imu0_linear_acceleration_rejection_threshold: 0.6  #
+        # imu0_linear_acceleration_rejection_threshold: 0.6  #
         imu0_remove_gravitational_acceleration: true
         
 

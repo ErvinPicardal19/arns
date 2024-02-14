@@ -27,7 +27,7 @@ def generate_launch_description():
    map = LaunchConfiguration("map")
    declare_map_path = DeclareLaunchArgument(
       name="map", 
-      default_value=os.path.join(pkg_slam, "maps", "map_test_save.yaml"),
+      default_value=os.path.join(pkg_slam, "maps", "map_real_save.yaml"),
       description="amcl map to load")
    
    start_joy_teleop = IncludeLaunchDescription(
@@ -44,6 +44,12 @@ def generate_launch_description():
       PythonLaunchDescriptionSource([os.path.join(
          pkg_navigation, 'launch', 'navigation_launch.py'
       )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+   )
+   
+   start_voice_cmd = Node(
+      package='arns_voice_cmd',
+         executable='voice_cmd_node',
+         output='screen'
    )
    
    
@@ -66,6 +72,7 @@ def generate_launch_description():
       
       # start_joy_teleop,
       start_amcl,
+      start_voice_cmd,
       # start_camera,
       start_navigation,
       # start_rviz2

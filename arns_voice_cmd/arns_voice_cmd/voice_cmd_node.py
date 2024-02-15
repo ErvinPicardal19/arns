@@ -43,7 +43,7 @@ class Voice_CMD_Node(Node):
 
    def respond(self, voice_data):
       if not self.wake_up:
-         if 'alexa' in voice_data.lower():
+         if 'alex' in voice_data.lower():
             self.text2speech(f"{sound_files_path}/wake_up.mp3")
             self.wake_up = True
       else:
@@ -52,13 +52,20 @@ class Voice_CMD_Node(Node):
             goal_pose = PoseStamped()
             goal_pose.header.stamp = self.get_clock().now().to_msg()
             goal_pose.header.frame_id = "map"
-            goal_pose.pose.position.x = 0.0710379
-            goal_pose.pose.position.y = -0.633185
+            goal_pose.pose.position.x = 5.963 
+            goal_pose.pose.position.y = 5.091
             self.goal_pose_publisher_.publish(goal_pose)
             self.wake_up = False
             
          elif 'living room' in voice_data.lower():
-            pass
+            self.text2speech(f"{sound_files_path}/kitchen.mp3")
+            goal_pose = PoseStamped()
+            goal_pose.header.stamp = self.get_clock().now().to_msg()
+            goal_pose.header.frame_id = "map"
+            goal_pose.pose.position.x = 1.652
+            goal_pose.pose.position.y = 2.848
+            self.goal_pose_publisher_.publish(goal_pose)
+            self.wake_up = False
 
          
 

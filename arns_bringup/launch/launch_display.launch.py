@@ -60,11 +60,11 @@ def generate_launch_description():
    #    parameters=[{"use_sim_time": use_sim_time}]
    # )
    
-   start_camera = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_bringup, 'launch', 'camera.launch.py'
-      )])
-   )
+   # start_camera = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(
+   #       pkg_bringup, 'launch', 'camera.launch.py'
+   #    )])
+   # )
    
    return LaunchDescription([
       declare_use_sim_time,

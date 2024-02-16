@@ -52,8 +52,10 @@ class Voice_CMD_Node(Node):
             goal_pose = PoseStamped()
             goal_pose.header.stamp = self.get_clock().now().to_msg()
             goal_pose.header.frame_id = "map"
-            goal_pose.pose.position.x = 5.963 
-            goal_pose.pose.position.y = 5.091
+            #goal_pose.pose.position.x = 5.963 
+            #goal_pose.pose.position.y = 5.091 
+            goal_pose.pose.position.x = 0.983 
+            goal_pose.pose.position.y = -0.191
             self.goal_pose_publisher_.publish(goal_pose)
             self.wake_up = False
             

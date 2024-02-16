@@ -53,12 +53,12 @@ def generate_launch_description():
    )
    
    
-   start_rviz2 = Node(
-      package="rviz2",
-      executable="rviz2",
-      arguments=['-d', os.path.join(pkg_description, "rviz/default.rviz")],
-      parameters=[{"use_sim_time": use_sim_time}]
-   )
+   # start_rviz2 = Node(
+   #    package="rviz2",
+   #    executable="rviz2",
+   #    arguments=['-d', os.path.join(pkg_description, "rviz/default.rviz")],
+   #    parameters=[{"use_sim_time": use_sim_time}]
+   # )
    
    # start_camera = IncludeLaunchDescription(
    #    PythonLaunchDescriptionSource([os.path.join(
@@ -75,5 +75,5 @@ def generate_launch_description():
       start_voice_cmd,
       # start_camera,
       # start_navigation,
-      start_rviz2
+      # start_rviz2
    ])

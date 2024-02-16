@@ -58,7 +58,7 @@ class Voice_CMD_Node(Node):
             self.wake_up = False
             
          elif 'living room' in voice_data.lower():
-            self.text2speech(f"{sound_files_path}/kitchen.mp3")
+            self.text2speech(f"{sound_files_path}/living_room.mp3")
             goal_pose = PoseStamped()
             goal_pose.header.stamp = self.get_clock().now().to_msg()
             goal_pose.header.frame_id = "map"

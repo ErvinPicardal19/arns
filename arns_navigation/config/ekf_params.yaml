@@ -4,9 +4,11 @@ ekf_filter_node:
 
         use_sim_time: false
         
-        frequency: 30.0 #80.0
+        frequency: 50.0 #80.0
         two_d_mode: true
-        print_diagnostics: true
+        # publish_acceleration: true
+        publish_tf: true
+        # print_diagnostics: true
         
         map_frame: map
         odom_frame: odom
@@ -15,6 +17,12 @@ ekf_filter_node:
 
         odom0: /diff_cont/odom
         imu0: /imu_broadcaster/imu
+
+        #        [x_pos   , y_pos    , z_pos,
+        #         roll    , pitch    , yaw,
+        #         x_vel   , y_vel    , z_vel,
+        #         roll_vel, pitch_vel, yaw_vel,
+        #         x_accel , y_accel  , z_accel]
 
         odom0_config: [false, false, false,
                        false, false, false,
@@ -27,6 +35,9 @@ ekf_filter_node:
                       false, false, false,
                       false, false, true, 
                       true, false, false]
+
+        odom0_differential: false
+        imu0_differential: false
 
         # imu0_pose_rejection_threshold: 0.45                 # Note the difference in parameter names
         #imu0_twist_rejection_threshold: 0.625                #

@@ -24,27 +24,27 @@ def generate_launch_description():
       description="Use gazebo simulation time"
    )
    
-   map = LaunchConfiguration("map")
-   declare_map_path = DeclareLaunchArgument(
-      name="map", 
-      default_value=os.path.join(pkg_slam, "maps", "map_real_save.yaml"),
-      description="amcl map to load")
+   # map = LaunchConfiguration("map")
+   # declare_map_path = DeclareLaunchArgument(
+   #    name="map", 
+   #    default_value=os.path.join(pkg_slam, "maps", "map_real_save.yaml"),
+   #    description="amcl map to load")
    
-   start_joy_teleop = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(pkg_teleop, 'launch', 'joystick.launch.py')])
-   )
+   # start_joy_teleop = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(pkg_teleop, 'launch', 'joystick.launch.py')])
+   # )
    
-   start_amcl = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_slam, 'launch', 'localization_launch.py'
-      )]), launch_arguments={'use_sim_time': use_sim_time, 'map': map}.items()
-   )
+   # start_amcl = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(
+   #       pkg_slam, 'launch', 'localization_launch.py'
+   #    )]), launch_arguments={'use_sim_time': use_sim_time, 'map': map}.items()
+   # )
    
-   start_navigation = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_navigation, 'launch', 'navigation_launch.py'
-      )]), launch_arguments={'use_sim_time': use_sim_time}.items()
-   )
+   # start_navigation = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(
+   #       pkg_navigation, 'launch', 'navigation_launch.py'
+   #    )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+   # )
    
    start_voice_cmd = Node(
       package='arns_voice_cmd',
@@ -53,12 +53,12 @@ def generate_launch_description():
    )
    
    
-   # start_rviz2 = Node(
-   #    package="rviz2",
-   #    executable="rviz2",
-   #    arguments=['-d', os.path.join(pkg_description, "rviz/default.rviz")],
-   #    parameters=[{"use_sim_time": use_sim_time}]
-   # )
+   start_rviz2 = Node(
+      package="rviz2",
+      executable="rviz2",
+      arguments=['-d', os.path.join(pkg_description, "rviz/default.rviz")],
+      parameters=[{"use_sim_time": use_sim_time}]
+   )
    
    # start_camera = IncludeLaunchDescription(
    #    PythonLaunchDescriptionSource([os.path.join(
@@ -71,9 +71,9 @@ def generate_launch_description():
       declare_map_path,
       
       # start_joy_teleop,
-      start_amcl,
+      # start_amcl,
       start_voice_cmd,
       # start_camera,
-      start_navigation,
-      # start_rviz2
+      # start_navigation,
+      start_rviz2
    ])

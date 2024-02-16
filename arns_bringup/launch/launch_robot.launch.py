@@ -1,30 +1,33 @@
 import os
 import xacro
-from launch import LaunchDescription
+from launch import LaunchDescription, LaunchContext
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration, Command
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, RegisterEventHandler, TimerAction
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
+from launch.events.process import ProcessStarted
 
 def generate_launch_description():
    
    use_ros2_control = LaunchConfiguration('use_ros2_control')
    use_sim_time = LaunchConfiguration('use_sim_time')
+   map = LaunchConfiguration("map")
    
    
    pkg_description = get_package_share_directory('arns_description')
    pkg_bno055 = get_package_share_directory('bno055')
    pkg_bringup = get_package_share_directory('arns_bringup')
    pkg_navigation = get_package_share_directory('arns_navigation')
-   pkg_foxglove = get_package_share_directory('foxglove_bridge')
+   pkg_slam = get_package_share_directory('arns_slam')
    
    ekf_param_file = os.path.join(pkg_navigation, "config/ekf_params.yaml")
    
    # start_joy_teleop = IncludeLaunchDescription(
    #    PythonLaunchDescriptionSource([os.path.join(pkg_teleop, 'launch', 'joystick.launch.py')])
    # )
+   
    
    rsp = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(
@@ -76,6 +79,19 @@ def generate_launch_description():
    #       pkg_bringup, 'launch', 'camera.launch.py'
    #    )])
    # )
+   
+   start_amcl = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_slam, 'launch', 'localization_launch.py'
+      )]), launch_arguments={'use_sim_time': use_sim_time, 'map': map}.items()
+   )
+   
+   start_navigation = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(
+         pkg_navigation, 'launch', 'navigation_launch.py'
+      )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+   )
+   
     
    return LaunchDescription([
       DeclareLaunchArgument(
@@ -88,6 +104,11 @@ def generate_launch_description():
          name='use_sim_time',
          default_value='false',
          description='Use sim time if true'),
+      
+      DeclareLaunchArgument(
+      name="map", 
+      default_value=os.path.join(pkg_slam, "maps", "map_room_save.yaml"),
+      description="amcl map to load"),
       
       
       RegisterEventHandler(
@@ -104,6 +125,19 @@ def generate_launch_description():
          )
       ),
       
+      RegisterEventHandler(
+         event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[start_amcl]
+         )
+      ),
+      RegisterEventHandler(
+         event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[start_navigation]
+            )
+         ),
+      
       # RegisterEventHandler(
       #    event_handler=OnProcessExit(
       #       target_action=diff_cont_controller,
@@ -117,5 +151,6 @@ def generate_launch_description():
       start_rplidar,
       # start_camera,
       start_bno055,
-      TimerAction(period=3.0, actions=[controller_manager])
+      TimerAction(period=3.0, actions=[controller_manager]),
+      
    ])

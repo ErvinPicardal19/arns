@@ -68,7 +68,7 @@ def generate_launch_description():
    
    return LaunchDescription([
       declare_use_sim_time,
-      declare_map_path,
+      # declare_map_path,
       
       # start_joy_teleop,
       # start_amcl,

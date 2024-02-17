@@ -33,7 +33,7 @@ class Voice_CMD_Node(Node):
       self.respond(voice_data)
    
    def record_audio(self, ask=False):
-      audio = stream.read(4096)
+      audio = stream.read(4096, exception_on_overflow = False)
       voice_data = ''
       if recognizer.AcceptWaveform(audio):
          voice_data = json.loads(recognizer.Result())['text']
@@ -52,10 +52,8 @@ class Voice_CMD_Node(Node):
             goal_pose = PoseStamped()
             goal_pose.header.stamp = self.get_clock().now().to_msg()
             goal_pose.header.frame_id = "map"
-            #goal_pose.pose.position.x = 5.963 
-            #goal_pose.pose.position.y = 5.091 
-            goal_pose.pose.position.x = 0.983 
-            goal_pose.pose.position.y = -0.191
+            goal_pose.pose.position.x = 5.963 
+            goal_pose.pose.position.y = 5.091 
             self.goal_pose_publisher_.publish(goal_pose)
             self.wake_up = False
             
@@ -72,7 +70,7 @@ class Voice_CMD_Node(Node):
          
 
    def text2speech(self, file):
-      cmd = "mpg123 " + file
+      cmd = "mpg123 -d UACDemoV10 " + file
       p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
       (output, err) = p.communicate()
       return output

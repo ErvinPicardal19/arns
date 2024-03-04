@@ -13,7 +13,7 @@ def generate_launch_description():
    
    use_ros2_control = LaunchConfiguration('use_ros2_control')
    use_sim_time = LaunchConfiguration('use_sim_time')
-   map = LaunchConfiguration("map")
+   # map = LaunchConfiguration("map")
    
    
    pkg_description = get_package_share_directory('arns_description')
@@ -80,17 +80,17 @@ def generate_launch_description():
    #    )])
    # )
    
-   start_amcl = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_slam, 'launch', 'localization_launch.py'
-      )]), launch_arguments={'use_sim_time': use_sim_time, 'map': map}.items()
-   )
+   # start_amcl = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(
+   #       pkg_slam, 'launch', 'localization_launch.py'
+   #    )]), launch_arguments={'use_sim_time': use_sim_time, 'map': map}.items()
+   # )
    
-   start_navigation = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(
-         pkg_navigation, 'launch', 'navigation_launch.py'
-      )]), launch_arguments={'use_sim_time': use_sim_time}.items()
-   )
+   # start_navigation = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(
+   #       pkg_navigation, 'launch', 'navigation_launch.py'
+   #    )]), launch_arguments={'use_sim_time': use_sim_time}.items()
+   # )
    
     
    return LaunchDescription([
@@ -107,7 +107,7 @@ def generate_launch_description():
       
       DeclareLaunchArgument(
       name="map", 
-      default_value=os.path.join(pkg_slam, "maps", "map_room_save.yaml"),
+      default_value=os.path.join(pkg_slam, "maps", "map_real_save.yaml"),
       description="amcl map to load"),
       
       
@@ -125,18 +125,18 @@ def generate_launch_description():
          )
       ),
       
-      RegisterEventHandler(
-         event_handler=OnProcessStart(
-            target_action=controller_manager,
-            on_start=[start_amcl]
-         )
-      ),
-      RegisterEventHandler(
-         event_handler=OnProcessStart(
-            target_action=controller_manager,
-            on_start=[start_navigation]
-            )
-         ),
+      # RegisterEventHandler(
+      #    event_handler=OnProcessStart(
+      #       target_action=controller_manager,
+      #       on_start=[start_amcl]
+      #    )
+      # ),
+      # RegisterEventHandler(
+      #    event_handler=OnProcessStart(
+      #       target_action=controller_manager,
+      #       on_start=[start_navigation]
+      #       )
+      #    ),
       
       # RegisterEventHandler(
       #    event_handler=OnProcessExit(

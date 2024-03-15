@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="alexbot">
+   
+   <xacro:include filename="$(find arns_description)/urdf/properties.xacro"/>
+   <xacro:include filename="$(find arns_description)/urdf/inertial_macro.xacro"/>
+   <xacro:include filename="$(find arns_description)/urdf/robot_core.urdf.xacro"/>
+   <xacro:include filename="$(find arns_description)/urdf/gazebo_control.xacro"/>
+
+
+</robot>

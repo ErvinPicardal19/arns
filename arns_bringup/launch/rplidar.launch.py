@@ -31,9 +31,9 @@ def generate_launch_description():
    
    declare_scan_mode = DeclareLaunchArgument(
       name="scan_mode",
-      default_value="True",
+      default_value="Standard",
       description="Define lidar scan mode"
-   ), 
+   )
    
    declare_serial_baudrate = DeclareLaunchArgument(
       name="serial_baudrate",
@@ -44,15 +44,14 @@ def generate_launch_description():
    start_rplidar_a1 = Node(
       package="rplidar_ros",
       executable="rplidar_composition",
-      parameters=[
-         {
-            "serial_port": serial_port_path,
-            "frame_id": frame_id,
-            "angle_compensate": angle_compensate,
-            "scan_mode": scan_mode,
-            "serial_baudrate": serial_baudrate
-         }
-      ]
+      parameters=[{
+         "serial_port": serial_port_path,
+         "frame_id": frame_id,
+         "angle_compensate": angle_compensate,
+         "scan_mode": scan_mode,
+         "serial_baudrate": serial_baudrate
+      }],
+      output="screen"
    )
    
    return LaunchDescription([

@@ -31,6 +31,11 @@
       <xacro:property name="screen_case_length" value="0.133"/>
       <xacro:property name="screen_case_width" value="0.175"/>
       <xacro:property name="screen_case_height" value="0.0298"/>
+
+      <!-- SCREEN -->
+      <xacro:property name="screen_length" value="0.100"/>
+      <xacro:property name="screen_width" value="0.165"/>
+      <xacro:property name="screen_height" value="0.010"/>
    
        <!-- LIDAR CASE -->
       <xacro:property name="lidar_case_length" value="0.110"/>
@@ -39,7 +44,7 @@
    
        <!-- LIDAR -->
        <xacro:property name="lidar_length" value="0.025"/>
-       <xacro:property name="lidar_radius" value="0.037"/>
+       <xacro:property name="lidar_diameter" value="0.072"/>
        <xacro:property name="lidar_mass" value="0.07"/>
    
       <!-- COLORS -->
@@ -60,7 +65,7 @@
      </material>
    
      <material name="lightblue">
-      <color rgba="${194/255} ${224/255} ${252/255} 1.0"/>
+      <color rgba="${0/255} ${141/255} ${255/255} 1.0"/>
       </material>
    
    

@@ -81,9 +81,87 @@
          </geometry>
       </collision>
 
-
       <xacro:inertial_box mass="${head_mass}" x="${head_width}" y="${head_length}" z="${head_height}">
          <origin xyz="${0.005} 0.0 ${(head_height/2) + 0.005}" rpy="0.0 0.0 ${pi/2}"/>
+      </xacro:inertial_box>
+   </link>
+
+   <!-- LIDAR CASE -->
+
+   <joint name="lidar_case_joint" type="fixed">
+      <origin xyz="-0.07 0.0 ${head_height + 0.005}" rpy="0.0 0.0 0.0"/>
+      <parent link="head_link"/>
+      <child link="lidar_case_link"/>
+   </joint>
+
+   <link name="lidar_case_link">
+      <visual>
+         <geometry>
+            <mesh filename="package://arns_description/meshes/lidar_case.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="lightblue"/>
+      </visual>
+      <collision>
+         <origin xyz="-0.001 0.0 ${(lidar_case_height/2)}" rpy="0.0 0.0 0.0"/>
+         <geometry>
+            <box size="${lidar_case_length} ${lidar_case_width} ${lidar_case_height}"/>
+         </geometry>
+      </collision>
+      <xacro:inertial_box mass="0.01" x="${lidar_case_length}" y="${lidar_case_width}" z="${lidar_case_height}">
+         <origin xyz="-0.001 0.0 ${(lidar_case_height/2)}" rpy="0.0 0.0 0.0"/>
+      </xacro:inertial_box>
+   </link>
+
+   <!-- SCREEN CASE -->
+
+   <joint name="screen_case_joint" type="fixed">
+      <origin xyz="0.07 0.0 ${head_height + 0.005}" rpy="0.0 0.0 0.0"/>
+      <parent link="head_link"/>
+      <child link="screen_case_link"/>
+   </joint>
+
+   <link name="screen_case_link">
+      <visual>
+         <geometry>
+            <mesh filename="package://arns_description/meshes/screen_case.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="lightblue"/>
+      </visual>
+      <collision>
+         <origin xyz="0.0 0.0 ${screen_case_height/2}" rpy="0.0 0.0 0.0"/>
+         <geometry>
+            <box size="${screen_case_length} ${screen_case_width} ${screen_case_height}"/>
+         </geometry>
+      </collision>
+      <xacro:inertial_box mass="0.01" x="${screen_case_length}" y="${screen_case_width}" z="${screen_case_height}">
+         <origin xyz="0.0 0.0 ${screen_case_height/2}" rpy="0.0 0.0 0.0"/>
+      </xacro:inertial_box>
+   </link>
+
+   <!-- SCREEN -->
+
+   <joint name="screen_joint" type="fixed">
+      <origin xyz="0.07 0.0 ${head_height + screen_case_height + 0.005}" rpy="0.0 0.0 0.0"/>
+      <parent link="head_link"/>
+      <child link="screen_link"/>
+      
+   </joint>
+
+   <link name="screen_link">
+      <visual>
+         <geometry>
+            <mesh filename="package://arns_description/meshes/screen.stl" scale="0.001 0.001 0.001"/>
+         </geometry>
+         <material name="black"/>
+      </visual>
+      <collision>
+         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+         <geometry>
+            <box size="${screen_length} ${screen_width} ${screen_height}"/>
+         </geometry>
+      </collision>
+      <xacro:inertial_box mass="0.01" x="${screen_length}" y="${screen_width}" z="${screen_height}">
+         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
       </xacro:inertial_box>
    </link>
 
@@ -188,6 +266,18 @@
    </gazebo>
 
    <gazebo reference="right_wheel_link">
+      <material>Gazebo/Black</material>
+   </gazebo>
+
+   <gazebo reference="lidar_case_link">
+      <material>Gazebo/Blue</material>
+   </gazebo>
+
+   <gazebo reference="screen_case_link">
+      <material>Gazebo/Blue</material>
+   </gazebo>
+
+   <gazebo reference="screen_link">
       <material>Gazebo/Black</material>
    </gazebo>
 

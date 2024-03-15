@@ -4,6 +4,9 @@
    <xacro:include filename="$(find arns_description)/urdf/properties.xacro"/>
    <xacro:include filename="$(find arns_description)/urdf/inertial_macro.xacro"/>
    <xacro:include filename="$(find arns_description)/urdf/robot_core.urdf.xacro"/>
+
+   <xacro:include filename="$(find arns_description)/urdf/lidar.xacro"/>
+
    <xacro:include filename="$(find arns_description)/urdf/gazebo_control.xacro"/>
 
 

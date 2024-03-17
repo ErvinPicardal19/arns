@@ -13,7 +13,7 @@ def generate_launch_description():
    
    arns_description_pkg = get_package_share_directory("arns_description")
    urdf_file = os.path.join(arns_description_pkg, "urdf/robot.urdf.xacro")
-   robot_description_raw = Command(['xacro ', urdf_file, ' use_ros2_control:=', use_ros2_control])
+   robot_description_raw = Command(['xacro ', urdf_file, ' use_ros2_control:=', use_ros2_control, ' sim_mode:=', use_sim_time])
    
    declare_use_sim_time_arg = DeclareLaunchArgument(
       name="use_sim_time",

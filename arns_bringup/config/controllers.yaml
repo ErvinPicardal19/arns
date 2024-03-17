@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
     update_rate: 30 # integer
-    use_sim_time: true
+    # use_sim_time: true
 
     joint_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -22,3 +22,4 @@ diff_controller:
     wheel_radius: 0.03975
 
     use_stamped_vel: false
+    enable_odom_tf: true

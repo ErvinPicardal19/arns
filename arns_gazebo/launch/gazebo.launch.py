@@ -17,16 +17,9 @@ def generate_launch_description():
    gazebo_params_file = os.path.join(arns_gazebo_pkg, "config/gazebo_params.yaml")
    default_world_path = os.path.join(arns_gazebo_pkg, "worlds/indoor.world")
    
-   use_sim_time = LaunchConfiguration("use_sim_time")
    use_ros2_control = LaunchConfiguration("use_ros2_control")
    world = LaunchConfiguration("world")
-   
-   
-   declare_use_sim_time = DeclareLaunchArgument(
-      name="use_sim_time",
-      default_value="True",
-      description="Use Gazebo clock if True"
-   )
+
 
    declare_use_ros2_control = DeclareLaunchArgument(
       name="use_ros2_control",
@@ -40,9 +33,10 @@ def generate_launch_description():
       description="Path to your gazebo world file"
    )
    
+   # use_sim_time is always True for this launch file
    start_rsp = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(arns_description_pkg, 'launch/rsp.launch.py')]),
-      launch_arguments={"use_sim_time": use_sim_time, "use_ros2_control": use_ros2_control}.items()
+      launch_arguments={"use_sim_time": "True", "use_ros2_control": use_ros2_control}.items()
    )
    
    # start_gazebo
@@ -68,7 +62,7 @@ def generate_launch_description():
       package="controller_manager",
       executable="spawner",
       name="diff_controller",
-      arguments=["diff_controller"]
+      arguments=["diff_controller", "--controller-manager", "/controller_manager"]
    )
    
    start_joint_broadcaster = Node(
@@ -76,30 +70,23 @@ def generate_launch_description():
       package="controller_manager",
       executable="spawner",
       name="joint_broadcaster",
-      arguments=["joint_broadcaster"]
+      arguments=["joint_broadcaster", "--controller-manager", "/controller_manager"]
    )
 
    
    return LaunchDescription([
-      declare_use_sim_time,
       declare_world_path,
       declare_use_ros2_control,
       
       RegisterEventHandler(
          event_handler=OnProcessExit(
-            target_action=start_spawner,
+            target_action=start_joint_broadcaster,
             on_exit=[start_diff_controller]
-         )
-      ),
-      
-      RegisterEventHandler(
-         event_handler=OnProcessExit(
-            target_action=start_spawner,
-            on_exit=[start_joint_broadcaster]
          )
       ),
       
       start_rsp,
       start_gazebo,
       start_spawner,
+      start_joint_broadcaster
    ])

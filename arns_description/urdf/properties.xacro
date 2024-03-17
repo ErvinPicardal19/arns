@@ -18,13 +18,13 @@
       <xacro:property name="wheel_length" value="0.035"/>
       <xacro:property name="wheel_mass" value="0.35"/>
       <xacro:property name="wheel_y_offset" value="0.120684"/>
-      <xacro:property name="wheel_z_offset" value="0.02"/>
+      <xacro:property name="wheel_z_offset" value="0.017"/>
    
       <!-- CASTER WHEELS -->
-      <xacro:property name="caster_wheel_radius" value="0.03"/>
+      <xacro:property name="caster_wheel_radius" value="0.033"/>
       <xacro:property name="caster_wheel_mass" value="0.4"/>
       <xacro:property name="caster_wheel_offset_x" value="0.420"/>
-      <xacro:property name="caster_wheel_offset_z" value="0.059"/>
+      <xacro:property name="caster_wheel_offset_z" value="${wheel_z_offset + (wheel_radius - caster_wheel_radius)}"/>
    
    
       <!-- SCREEN CASE -->

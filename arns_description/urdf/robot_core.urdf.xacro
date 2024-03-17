@@ -208,7 +208,6 @@
       <visual>
          <origin xyz="0.0 0.0 0.0" rpy="${pi/2} 0.0 0.0"/>
          <geometry>
-            <!-- <cylinder radius="${wheel_radius}" length="${wheel_length}"/> -->
             <mesh filename="package://arns_description/meshes/right_wheel.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
@@ -227,9 +226,9 @@
    <!-- CASTER WHEEL -->
 
    <joint name="caster_wheel_joint" type="fixed">
+      <origin xyz="${caster_wheel_offset_x - 0.121046} 0 -${caster_wheel_offset_z}"/>
       <parent link="base_link"/>
       <child link="caster_wheel_link"/>
-      <origin xyz="${caster_wheel_offset_x - 0.121046} 0 -0.026"/>
    </joint>
 
    <link name="caster_wheel_link">

@@ -12,7 +12,6 @@ find_package(ament_cmake REQUIRED)
 find_package(rplidar_ros REQUIRED)
 find_package(controller_manager REQUIRED)
 find_package(ros2_control REQUIRED)
-find_package(gazebo_ros2_control REQUIRED)
 find_package(v4l2_camera REQUIRED)
 
 if(BUILD_TESTING)

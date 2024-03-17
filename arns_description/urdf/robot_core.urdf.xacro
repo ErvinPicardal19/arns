@@ -172,14 +172,13 @@
       <parent link="base_link"/>
       <child link="left_wheel_link"/>
       <axis xyz="0.0 0.0 1"/>
-      <dynamics damping="0.7" friction="0.1" />
+      <!-- <dynamics damping="0.7" friction="0.1" /> -->
    </joint>
 
    <link name="left_wheel_link">
       <visual>
          <origin xyz="0.0 0.0 0.0" rpy="-${pi/2} 0.0 0.0"/>
          <geometry>
-            <!-- <cylinder radius="${wheel_radius}" length="${wheel_length}"/> -->
             <mesh filename="package://arns_description/meshes/left_wheel.stl" scale="0.001 0.001 0.001"/>
          </geometry>
          <material name="black"/>
@@ -187,7 +186,7 @@
       <collision>
          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
          <geometry>
-            <cylinder radius="${wheel_radius + 0.002}" length="${wheel_length}"/>
+            <sphere radius="${wheel_radius}"/>
          </geometry>
       </collision>
       <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_length}" radius="${wheel_radius}">
@@ -202,7 +201,7 @@
       <parent link="base_link"/>
       <child link="right_wheel_link"/>
       <axis xyz="0.0 0.0 -1"/>
-      <dynamics damping="0.7" friction="0.1" />
+      <!-- <dynamics damping="0.7" friction="0.1" /> -->
    </joint>
 
    <link name="right_wheel_link">
@@ -217,7 +216,7 @@
       <collision>
          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
          <geometry>
-            <cylinder radius="${wheel_radius + 0.002}" length="${wheel_length}"/>
+            <sphere radius="${wheel_radius}"/>
          </geometry>
       </collision>
       <xacro:inertial_cylinder mass="${wheel_mass}" length="${wheel_length}" radius="${wheel_radius}">

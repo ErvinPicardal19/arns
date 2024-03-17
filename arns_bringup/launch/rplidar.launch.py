@@ -25,7 +25,7 @@ def generate_launch_description():
    
    declare_angle_compensate = DeclareLaunchArgument(
       name="angle_compensate",
-      default_value="True",
+      default_value="true",
       description="Enable angle_compensate if True"
    )
    

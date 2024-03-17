@@ -43,6 +43,14 @@ def generate_launch_description():
       name="joint_broadcaster",
       arguments=["joint_broadcaster", "--controller-manager", "/controller_manager"]
    )
+   
+   start_rplidar = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(arns_bringup_pkg, "launch/rplidar.launch.py")])
+   )
+   
+   start_camera = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(arns_bringup_pkg, "launch/camera.launch.py")])
+   )
 
    
    return LaunchDescription([
@@ -56,6 +64,8 @@ def generate_launch_description():
       
       start_controller_manager,
       start_rsp,
+      start_rplidar,
+      start_camera,
       start_joint_broadcaster
       
    ])

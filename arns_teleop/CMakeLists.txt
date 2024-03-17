@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(arns_gazebo)
+project(arns_teleop)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -10,7 +10,8 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
-find_package(gazebo_ros REQUIRED)
+find_package(joy REQUIRED)
+find_package(teleop_twist_joy REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -25,7 +26,7 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY launch config worlds
+  DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}
 )
 

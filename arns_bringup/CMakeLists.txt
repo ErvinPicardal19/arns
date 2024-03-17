@@ -10,6 +10,10 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 find_package(rplidar_ros REQUIRED)
+find_package(controller_manager REQUIRED)
+find_package(ros2_control REQUIRED)
+find_package(gazebo_ros2_control REQUIRED)
+find_package(v4l2_camera REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

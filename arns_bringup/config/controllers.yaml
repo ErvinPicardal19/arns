@@ -8,7 +8,7 @@ controller_manager:
 
     diff_controller:
       type: diff_drive_controller/DiffDriveController
-ar
+
 
 diff_controller:
   ros__parameters:

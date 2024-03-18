@@ -6,19 +6,12 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 # find dependencies
-set(PACKAGE_DEPENDENCIES
-  hardware_interface
-  pluginlib
-  rclcpp
-  rclcpp_lifecycle
-)
-
-# find dependencies
 find_package(ament_cmake REQUIRED)
-foreach(Dependency IN ITEMS ${PACKAGE_DEPENDENCIES})
-  find_package(${Dependency} REQUIRED)
-endforeach()
-
+find_package(hardware_interface REQUIRED)
+find_package(pluginlib REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
+find_package(std_srvs REQUIRED)
 
 #-------------------------------------------------
 # BUILDING THE LIBRARY
@@ -42,11 +35,15 @@ target_include_directories(arns_hardware PRIVATE include)
 # for adding non-locally or locally compiled libraries as dependencies (e.g. find_package)
 ament_target_dependencies(
   arns_hardware PUBLIC
-  ${PACKAGE_DEPENDENCIES}
+  hardware_interface
+  pluginlib
+  rclcpp
+  rclcpp_lifecycle
 )
 
 # for adding only locally compiled libraries as dependencies
 # target_link_libraries(arns_hardware custom_interfaces)
+target_link_libraries(arns_hardware PUBLIC serial)
 
 #-------------------------------------------------
 
@@ -59,14 +56,16 @@ install(
   DESTINATION include/arns_hardware
 )
 
-install(TARGETS arns_hardware
-  EXPORT export_arns_hardware
-  ARCHIVE DESTINATION lib
+install(
+  TARGETS arns_hardware
+  DESTINATION share/${PROJECT_NAME}
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
 
-ament_export_targets(export_arns_hardware HAS_LIBRARY_TARGET)
-ament_export_dependencies(${PACKAGE_DEPENDENCIES})
+include_directories(include)
+
+
+ament_export_libraries(arns_hardware)
 
 ament_package()

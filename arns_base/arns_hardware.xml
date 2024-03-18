@@ -1,0 +1,9 @@
+<library path="arns_hardware">
+   <class name="arns_base/ARNSystemHardware"
+          type="arns_base::ARNSystemHardware"
+          base_class_type="hardware_interface::SystemInterface">
+     <description>
+      ros2_control Hardware Interface implementation for ARNS package using a system hardware interface-type. It utilize serial communication in order to interface with the (Arduino) motor controller.
+     </description>
+   </class>
+ </library>

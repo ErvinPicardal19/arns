@@ -72,6 +72,16 @@ def generate_launch_description():
       name="joint_broadcaster",
       arguments=["joint_broadcaster", "--controller-manager", "/controller_manager"]
    )
+   
+   twist_mux_config = os.path.join(get_package_share_directory("arns_teleop"), "config/twist_mux.yaml")
+   start_twist_mux = Node(
+      package="twist_mux",
+      executable="twist_mux",
+      parameters=[twist_mux_config],
+      remappings=[
+         ("/cmd_vel_out", "/diff_controller/cmd_vel_unstamped")
+      ]
+   )
 
    
    return LaunchDescription([
@@ -88,5 +98,6 @@ def generate_launch_description():
       start_rsp,
       start_gazebo,
       start_spawner,
-      start_joint_broadcaster
+      start_joint_broadcaster,
+      start_twist_mux
    ])

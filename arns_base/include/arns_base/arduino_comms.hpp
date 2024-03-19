@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_ARDUINO_ARDUINO_COMMS_HPP
-#define DIFFDRIVE_ARDUINO_ARDUINO_COMMS_HPP
+#ifndef ARNS_HARDWARE_COMMS_HPP
+#define ARNS_HARDWARE_COMMS_HPP
 
 // #include <cstring>
 // #include <cstdlib>
@@ -37,4 +37,4 @@ private:
     int timeout_ms_;
 };
 
-#endif // DIFFDRIVE_ARDUINO_ARDUINO_COMMS_HPP
+#endif

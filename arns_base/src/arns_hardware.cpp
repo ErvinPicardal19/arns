@@ -194,7 +194,7 @@ namespace arns_base
       return hardware_interface::return_type::OK;
    }
 
-}  // namespace ros2_control_demo_example_2
+}
 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(

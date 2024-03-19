@@ -30,7 +30,7 @@ def generate_launch_description():
       name="teleop_node",
       parameters=[joystick_config_file, {"use_sim_time": use_sim_time}],
       remappings=[
-         ("/cmd_vel", "/diff_controller/cmd_vel_unstamped")
+         ("/cmd_vel", "/cmd_vel_joy")
       ]
    )
    

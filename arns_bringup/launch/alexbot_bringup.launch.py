@@ -83,8 +83,7 @@ def generate_launch_description():
       package="robot_localization",
       executable="ekf_node",
       parameters=[
-         ekf_localization_params,
-         {"use_sim_time": "False"}
+         ekf_localization_params
       ]
    )
 

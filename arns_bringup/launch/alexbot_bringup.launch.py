@@ -12,7 +12,19 @@ def generate_launch_description():
 
    arns_description_pkg = get_package_share_directory("arns_description")
    arns_bringup_pkg = get_package_share_directory("arns_bringup")
+   arns_navigation_pkg = get_package_share_directory("arns_navigation")
+   bno055_pkg = get_package_share_directory("bno055")
    controllers_config_file = os.path.join(arns_bringup_pkg, "config/controllers.yaml")
+   
+   ekf_localization_params = os.path.join(arns_navigation_pkg, "params/ekf.yaml")
+   
+   use_robot_localization = LaunchConfiguration("use_robot_localization")
+   
+   declare_use_robot_localization = DeclareLaunchArgument(
+      name="use_robot_localization",
+      default_value="True",
+      description="Use robot_localization if True"
+   )
    
    # use_sim_time is always False as this launch file will not use Gazebo
    start_rsp = IncludeLaunchDescription(
@@ -48,6 +60,10 @@ def generate_launch_description():
       PythonLaunchDescriptionSource([os.path.join(arns_bringup_pkg, "launch/rplidar.launch.py")])
    )
    
+   start_bno055 = IncludeLaunchDescription(
+      PythonLaunchDescriptionSource([os.path.join(bno055_pkg, "launch/bno055.launch.py")])
+   )
+   
    start_camera = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(arns_bringup_pkg, "launch/camera.launch.py")])
    )
@@ -61,9 +77,20 @@ def generate_launch_description():
          ("/cmd_vel_out", "/diff_controller/cmd_vel_unstamped")
       ]
    )
+   
+   start_ekf_localization = Node(
+      condition=IfCondition(use_robot_localization),
+      package="robot_localization",
+      executable="ekf_node",
+      parameters=[
+         ekf_localization_params,
+         {"use_sim_time": "False"}
+      ]
+   )
 
    
    return LaunchDescription([
+      declare_use_robot_localization,
       
       RegisterEventHandler(
          event_handler=OnProcessExit(
@@ -75,7 +102,9 @@ def generate_launch_description():
       start_controller_manager,
       start_rsp,
       start_rplidar,
+      start_bno055,
       start_camera,
       start_joint_broadcaster,
-      start_twist_mux
+      start_twist_mux,
+      start_ekf_localization
    ])

@@ -46,7 +46,10 @@
        <xacro:property name="lidar_length" value="0.025"/>
        <xacro:property name="lidar_diameter" value="0.072"/>
        <xacro:property name="lidar_mass" value="0.07"/>
-   
+       
+       <!-- center at base_link from chassis -->
+       <xacro:property name="move_to_center" value="${0.180 + 0.020}"/>
+
       <!-- COLORS -->
       <material name="white">
          <color rgba="1 1 1 1"/>

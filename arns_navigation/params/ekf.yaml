@@ -5,15 +5,31 @@ ekf_filter_node:
         use_sim_time: False
         
         frequency: 50.0
-        two_d_mode: true
+        # two_d_mode: true
+        two_d_mode: false
+
+        publish_acceleration: true
+
+        publish_tf: true
 
         map_frame: map
         odom_frame: odom
-        base_link_frame: base_footprint
+        base_link_frame: base_link
         world_frame: odom
 
         odom0: diff_controller/odom
+        odom0_config: [true, true, true,
+                       false, false, false,
+                       true, true, false, 
+                       false, false, true,
+                       false, false, false]
+
         imu0: imu_broadcaster/imu
+        imu0_config: [false, false, false, 
+                      true, true, true, 
+                      false, false, false,
+                      false, false, false, 
+                      false, false, false]
 
         #        [x_pos   , y_pos    , z_pos,
         #         roll    , pitch    , yaw,
@@ -21,14 +37,15 @@ ekf_filter_node:
         #         roll_vel, pitch_vel, yaw_vel,
         #         x_accel , y_accel  , z_accel]
 
-        odom0_config: [false, false, false,
-                       false, false, false,
-                       true, true, false, 
-                       false, false, true,
-                       false, false, false]
+        # odom0_config: [false, false, false,
+        #                false, false, false,
+        #                true, true, false, 
+        #                false, false, true,
+        #                false, false, false]
 
-        imu0_config: [false, false, false, 
-                      false, false, false, 
-                      false, false, false,
-                      false, false, true, 
-                      true, false, false]
+
+        # imu0_config: [false, false, false, 
+        #               false, false, false, 
+        #               false, false, false,
+        #               false, false, true, 
+        #               true, false, false]

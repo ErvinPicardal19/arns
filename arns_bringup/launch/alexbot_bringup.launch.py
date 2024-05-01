@@ -64,9 +64,9 @@ def generate_launch_description():
       PythonLaunchDescriptionSource([os.path.join(bno055_pkg, "launch/bno055.launch.py")])
    )
    
-   start_camera = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(arns_bringup_pkg, "launch/camera.launch.py")])
-   )
+   # start_camera = IncludeLaunchDescription(
+   #    PythonLaunchDescriptionSource([os.path.join(arns_bringup_pkg, "launch/camera.launch.py")])
+   # )
    
    twist_mux_config = os.path.join(get_package_share_directory("arns_teleop"), "config/twist_mux.yaml")
    start_twist_mux = Node(
@@ -100,10 +100,10 @@ def generate_launch_description():
       
       start_controller_manager,
       start_rsp,
+      start_twist_mux,
       start_rplidar,
       start_bno055,
-      start_camera,
+      # start_camera,
       start_joint_broadcaster,
-      start_twist_mux,
       start_ekf_localization
    ])

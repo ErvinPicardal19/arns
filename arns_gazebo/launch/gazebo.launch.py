@@ -22,6 +22,13 @@ def generate_launch_description():
    world = LaunchConfiguration("world")
    use_rviz = LaunchConfiguration("use_rviz")
    rviz_config_file = LaunchConfiguration("rviz_config")
+   use_robot_localization = LaunchConfiguration("use_robot_localization")
+   
+   declare_use_robot_localization = DeclareLaunchArgument(
+      name="use_robot_localization",
+      default_value="False",
+      description="Use robot_localization if True"
+   )
    
    declare_use_ros2_control = DeclareLaunchArgument(
       name="use_ros2_control",
@@ -121,6 +128,7 @@ def generate_launch_description():
    # ROBOT_LOCALIZATION
    ekf_params = os.path.join(get_package_share_directory("arns_navigation"), "params/ekf.yaml")
    start_robot_localization = Node(
+      condition=IfCondition(use_robot_localization),
       package="robot_localization",
       executable="ekf_node",
       parameters=[
@@ -134,6 +142,7 @@ def generate_launch_description():
       declare_use_ros2_control,
       declare_use_rviz,
       declare_rviz_config_file,
+      declare_use_robot_localization,
       
       RegisterEventHandler(
          event_handler=OnProcessExit(

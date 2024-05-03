@@ -14,16 +14,22 @@ def generate_launch_description():
    arns_bringup_pkg = get_package_share_directory("arns_bringup")
    arns_navigation_pkg = get_package_share_directory("arns_navigation")
    bno055_pkg = get_package_share_directory("bno055")
-   controllers_config_file = os.path.join(arns_bringup_pkg, "config/controllers.yaml")
+   # controllers_config_file = os.path.join(arns_bringup_pkg, "config/controllers.yaml")
    
    ekf_localization_params = os.path.join(arns_navigation_pkg, "params/ekf.yaml")
    
+   controllers_config_file = LaunchConfiguration("controllers_config")
    use_robot_localization = LaunchConfiguration("use_robot_localization")
    
    declare_use_robot_localization = DeclareLaunchArgument(
       name="use_robot_localization",
-      default_value="True",
+      default_value="False",
       description="Use robot_localization if True"
+   )
+   declare_controllers_config = DeclareLaunchArgument(
+      name="controllers_config",
+      default_value=os.path.join(arns_bringup_pkg, "config/controllers.yaml"),
+      description="Full path to the controllers yaml file"
    )
    
    # use_sim_time is always False as this launch file will not use Gazebo
@@ -61,7 +67,9 @@ def generate_launch_description():
    )
    
    start_bno055 = IncludeLaunchDescription(
-      PythonLaunchDescriptionSource([os.path.join(bno055_pkg, "launch/bno055.launch.py")])
+      PythonLaunchDescriptionSource([os.path.join(bno055_pkg, "launch/bno055.launch.py")],
+      condition=IfCondition(use_robot_localization)
+      )
    )
    
    # start_camera = IncludeLaunchDescription(
@@ -90,6 +98,7 @@ def generate_launch_description():
    
    return LaunchDescription([
       declare_use_robot_localization,
+      declare_controllers_config,
       
       RegisterEventHandler(
          event_handler=OnProcessExit(

@@ -13,7 +13,7 @@ find_package(rplidar_ros REQUIRED)
 find_package(controller_manager REQUIRED)
 find_package(ros2_control REQUIRED)
 find_package(v4l2_camera REQUIRED)
-find_package(arns_slam REQUIRED)
+#find_package(arns_slam REQUIRED)
 find_package(rviz2 REQUIRED)
 find_package(robot_localization REQUIRED)
 

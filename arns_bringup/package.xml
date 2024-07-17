@@ -15,7 +15,6 @@
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>v4l2_camera</exec_depend>
 
-  <depend>arns_slam</depend>
   <depend>rviz2</depend>
   <depend>robot_localization</depend>
 

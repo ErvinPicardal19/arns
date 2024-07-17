@@ -68,7 +68,7 @@ def generate_launch_description():
    
    start_bno055 = IncludeLaunchDescription(
       PythonLaunchDescriptionSource([os.path.join(bno055_pkg, "launch/bno055.launch.py")],
-      condition=IfCondition(use_robot_localization)
+      # condition=IfCondition(use_robot_localization)
       )
    )
    

@@ -27,4 +27,4 @@ diff_controller:
     twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
 
     use_stamped_vel: false
-    enable_odom_tf: true
+    enable_odom_tf: false

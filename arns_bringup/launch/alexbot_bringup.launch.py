@@ -110,7 +110,7 @@ def generate_launch_description():
       start_controller_manager,
       start_rsp,
       start_twist_mux,
-      start_rplidar,
+      # start_rplidar,
       start_bno055,
       # start_camera,
       start_joint_broadcaster,

@@ -53,10 +53,10 @@ class Voice_CMD_Node(Node):
             goal_pose = PoseStamped()
             goal_pose.header.stamp = self.get_clock().now().to_msg()
             goal_pose.header.frame_id = "map"
-            goal_pose.pose.position.x = 0.0
-            goal_pose.pose.position.y = 0.0
-            # goal_pose.pose.position.x = 0.983 
-            # goal_pose.pose.position.y = -0.191
+            goal_pose.pose.position.x = 2.31334
+            goal_pose.pose.position.y = -5.23379
+            goal_pose.pose.orientation.z = -0.609476
+            goal_pose.pose.orientation.w = 0.792804
             self.goal_pose_publisher_.publish(goal_pose)
             self.wake_up = False
             
@@ -66,8 +66,10 @@ class Voice_CMD_Node(Node):
             goal_pose = PoseStamped()
             goal_pose.header.stamp = self.get_clock().now().to_msg()
             goal_pose.header.frame_id = "map"
-            goal_pose.pose.position.x = 5.72903
-            goal_pose.pose.position.y = 0.711701
+            goal_pose.pose.position.x = 0.73549
+            goal_pose.pose.position.y = -0.820637
+            goal_pose.pose.orientation.z = 0.812309
+            goal_pose.pose.orientation.w = 0.583227
             self.goal_pose_publisher_.publish(goal_pose)
             self.wake_up = False
 
